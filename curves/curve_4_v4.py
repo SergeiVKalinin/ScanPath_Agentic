@@ -1,38 +1,32 @@
-# curve_type: serpentine
-# description: Variable-density serpentine with adaptive line spacing, denser in outer regions
+# curve_type: serpentine_asymmetric_frequency
+# description: 320 lines with large frequency differential between x and y
 import numpy as np
-N = 10000
+N = 1000
 # --- parameters ---
-base_num_lines = 120
-density_threshold = 0.7
-outer_density_multiplier = 1.2
+num_lines = 320
+x_amp = 0.009
+y_amp = 0.007
+x_freq = 13
+y_freq = 37
 
-y_positions = []
-for i in range(base_num_lines):
-    y_val = i / (base_num_lines - 1)
-    y_positions.append(y_val)
-    if y_val > density_threshold:
-        extra_lines = int((base_num_lines * outer_density_multiplier - base_num_lines) * (i / base_num_lines))
-        if extra_lines > 0 and i < base_num_lines - 1:
-            for j in range(1, min(extra_lines + 1, 3)):
-                y_positions.append(y_val + j * 0.001)
+t = np.linspace(0, 1, N)
+x = np.zeros(N)
+y = np.zeros(N)
 
-y_positions = sorted(set(y_positions))
-num_lines = len(y_positions)
-points_per_line = N // num_lines
-
-x = []
-y = []
-for i, y_val in enumerate(y_positions):
-    if i % 2 == 0:
-        x_line = np.linspace(0, 1, points_per_line)
-    else:
-        x_line = np.linspace(1, 0, points_per_line)
+for i in range(N):
+    line_idx = int(t[i] * num_lines)
+    pos_in_line = (t[i] * num_lines) % 1.0
     
-    y_line = np.full(points_per_line, y_val)
-    x.extend(x_line)
-    y.extend(y_line)
+    if line_idx % 2 == 0:
+        x[i] = pos_in_line
+    else:
+        x[i] = 1.0 - pos_in_line
+    
+    y[i] = line_idx / num_lines
+    
+    x[i] += x_amp * np.sin(2 * np.pi * x_freq * t[i])
+    y[i] += y_amp * np.sin(2 * np.pi * y_freq * t[i])
 
-x = np.array(x[:N])
-y = np.array(y[:N])
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
