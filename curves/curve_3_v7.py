@@ -1,30 +1,27 @@
-# curve_type: serpentine
-# description: Optimized variable density with enhanced dual-axis perturbation
+# curve_type: serpentine_sinusoidal
+# description: Golden Ratio Frequencies - frequency ratio 1:1.625 approaching golden ratio
 import numpy as np
 N = 1000
 # --- parameters ---
-num_lines = 250
-density_exponent = 1.3
-perturbation_x_amp = 0.011
-perturbation_x_freq = 19
-perturbation_y_amp = 0.008
-perturbation_y_freq = 23
-
+num_lines = 350
+x_amp = 0.007
+y_amp = 0.005
+x_freq = 16
+y_freq = 26
+# --- curve generation ---
 t = np.linspace(0, 1, N)
-t_adjusted = t ** density_exponent
-t_adjusted = t_adjusted / t_adjusted[-1]
-
-line_indices = np.floor(t_adjusted * num_lines).astype(int)
-line_indices = np.clip(line_indices, 0, num_lines - 1)
-progress_in_line = (t_adjusted * num_lines) % 1
-
-y = line_indices / (num_lines - 1)
-x = np.where(line_indices % 2 == 0, progress_in_line, 1 - progress_in_line)
-
-# Dual-axis perturbations
-x += perturbation_x_amp * np.sin(2 * np.pi * perturbation_x_freq * t)
-y += perturbation_y_amp * np.sin(2 * np.pi * perturbation_y_freq * t)
-
+x = np.zeros(N)
+y = np.zeros(N)
+for i in range(N):
+    line_idx = int(t[i] * num_lines)
+    local_t = (t[i] * num_lines) - line_idx
+    if line_idx % 2 == 0:
+        x[i] = local_t
+    else:
+        x[i] = 1.0 - local_t
+    y[i] = line_idx / num_lines
+    x[i] += x_amp * np.sin(2 * np.pi * x_freq * t[i])
+    y[i] += y_amp * np.sin(2 * np.pi * y_freq * t[i])
 x = np.clip(x, 0, 1)
 y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
