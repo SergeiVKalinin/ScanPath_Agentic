@@ -1,19 +1,24 @@
 # curve_type: raster
-# description: Standard unidirectional raster scan with flyback
+# description: Horizontal raster scan with small spiral wobble
 import numpy as np
 N = 10000
 # --- parameters ---
-num_lines = 100  # number of scan lines
-points_per_line = N // num_lines
+lines = 50  # number of horizontal lines
+wobble_amplitude = 0.01  # 1% wobble
+wobble_frequency = 20  # wobble cycles per line
 
-x = np.zeros(N)
-y = np.zeros(N)
-
-for i in range(num_lines):
-    start_idx = i * points_per_line
-    end_idx = start_idx + points_per_line
-    # Forward scan
-    x[start_idx:end_idx] = np.linspace(0, 1, points_per_line)
-    y[start_idx:end_idx] = i / (num_lines - 1)
-
+t = np.linspace(0, 1, N)
+# Main raster scan
+line_idx = np.floor(t * lines)
+y = line_idx / lines
+# Alternate direction for each line
+x = np.where(line_idx % 2 == 0, t * lines - line_idx, 1 - (t * lines - line_idx))
+# Add spiral wobble
+theta = 2 * np.pi * wobble_frequency * t * lines
+r = wobble_amplitude * t
+x += r * np.cos(theta)
+y += r * np.sin(theta)
+# Normalize
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
