@@ -1,24 +1,22 @@
-# curve_type: raster
-# description: Bidirectional/serpentine raster scan
+# curve_type: spiral
+# description: Archimedean spiral with sinusoidal radial wobble
 import numpy as np
-N = 10000
+N = 15000
 # --- parameters ---
-num_lines = 100  # number of scan lines
-points_per_line = N // num_lines
+spiral_turns = 5
+wobble_amplitude = 0.05  # 5% radial wobble
+wobble_frequency = 30  # wobble cycles
 
-x = np.zeros(N)
-y = np.zeros(N)
-
-for i in range(num_lines):
-    start_idx = i * points_per_line
-    end_idx = start_idx + points_per_line
-    y[start_idx:end_idx] = i / (num_lines - 1)
-    
-    if i % 2 == 0:
-        # Forward scan (left to right)
-        x[start_idx:end_idx] = np.linspace(0, 1, points_per_line)
-    else:
-        # Backward scan (right to left)
-        x[start_idx:end_idx] = np.linspace(1, 0, points_per_line)
-
+t = np.linspace(0, 1, N)
+# Main Archimedean spiral
+theta = 2 * np.pi * spiral_turns * t
+r = 0.5 * t
+# Add sinusoidal radial wobble
+r += wobble_amplitude * np.sin(2 * np.pi * wobble_frequency * t)
+# Convert to Cartesian
+x = 0.5 + r * np.cos(theta)
+y = 0.5 + r * np.sin(theta)
+# Normalize
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
