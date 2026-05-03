@@ -1,32 +1,27 @@
-# curve_type: variable_density_serpentine
-# description: bidirectional serpentine with denser spacing at edges
+# curve_type: serpentine
+# description: Edge-weighted serpentine with inverse density profile
 import numpy as np
 N = 10000
 # --- parameters ---
-num_lines = 100
-edge_density_factor = 1.5
-
-# create non-uniform line spacing (denser at edges)
-line_indices = np.arange(num_lines)
-normalized = line_indices / (num_lines - 1)
-# quadratic spacing: denser at 0 and 1
-spacing_weights = 1 + edge_density_factor * (4 * (normalized - 0.5)**2)
-cumulative = np.cumsum(spacing_weights)
-y_positions = (cumulative - cumulative[0]) / (cumulative[-1] - cumulative[0])
-
-x = np.zeros(N)
-y = np.zeros(N)
-points_per_line = N // num_lines
-
+num_lines = 100  # keep consistent with top performer
+base_points = 50  # baseline points per line
+# Calculate edge-weighted allocation
+normalized_positions = np.linspace(0, 1, num_lines)
+weights = 1.0 + 2.0 * (4 * (normalized_positions - 0.5)**2)  # peaks at edges
+weights = weights / weights.sum()
+points_per_line = (weights * N).astype(int)
+# Adjust for exact N
+points_per_line[-1] += N - points_per_line.sum()
+# Create bidirectional serpentine
+points_list = []
 for i in range(num_lines):
-    start_idx = i * points_per_line
-    end_idx = start_idx + points_per_line
-    
-    if i % 2 == 0:
-        x[start_idx:end_idx] = np.linspace(0, 1, points_per_line)
-    else:
-        x[start_idx:end_idx] = np.linspace(1, 0, points_per_line)
-    
-    y[start_idx:end_idx] = y_positions[i]
-
-points = np.column_stack([x, y])
+    y_coord = i / (num_lines - 1)
+    n_pts = points_per_line[i]
+    if n_pts > 0:
+        if i % 2 == 0:
+            x_coords = np.linspace(0, 1, n_pts)
+        else:
+            x_coords = np.linspace(1, 0, n_pts)
+        y_coords = np.full(n_pts, y_coord)
+        points_list.append(np.column_stack([x_coords, y_coords]))
+points = np.vstack(points_list)
