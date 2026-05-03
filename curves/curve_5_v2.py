@@ -1,42 +1,21 @@
-# curve_type: adaptive_center_weighted_serpentine
-# description: serpentine with more points per line in center, fewer at edges
+# curve_type: spiral
+# description: Archimedean spiral with 70 turns and density perturbation
 import numpy as np
 N = 10000
 # --- parameters ---
-num_lines = 100
-center_weight = 2.0
-
-# calculate points per line with quadratic weighting toward center
-line_indices = np.arange(num_lines)
-normalized = line_indices / (num_lines - 1)
-# quadratic weight: peaks at center (0.5)
-weights = 1 + center_weight * (1 - 4 * (normalized - 0.5)**2)
-weights = weights / weights.sum() * N
-points_per_line = np.round(weights).astype(int)
-
-# adjust to ensure sum equals N
-diff = N - points_per_line.sum()
-if diff > 0:
-    points_per_line[num_lines // 2:num_lines // 2 + diff] += 1
-elif diff < 0:
-    points_per_line[0:-diff] -= 1
-
-x = []
-y = []
-
-for i in range(num_lines):
-    y_pos = i / (num_lines - 1)
-    n_points = points_per_line[i]
-    
-    if n_points > 0:
-        if i % 2 == 0:
-            x_line = np.linspace(0, 1, n_points)
-        else:
-            x_line = np.linspace(1, 0, n_points)
-        
-        x.extend(x_line)
-        y.extend([y_pos] * n_points)
-
-x = np.array(x)
-y = np.array(y)
+num_turns = 70  # optimized between Fermat's 50 and higher values
+perturbation_amplitude = 0.02  # slight density variation
+perturbation_frequency = 10  # oscillation count
+# Generate Archimedean spiral with linear spacing
+theta = np.linspace(0, num_turns * 2 * np.pi, N)
+r = theta / (num_turns * 2 * np.pi)  # linear radial growth
+# Add perturbation for density variation
+r = r * (1.0 + perturbation_amplitude * np.sin(perturbation_frequency * theta))
+# Scale to unit square centered at (0.5, 0.5)
+r = r * 0.5  # max radius = 0.5
+x = 0.5 + r * np.cos(theta)
+y = 0.5 + r * np.sin(theta)
+# Ensure bounds [0, 1]
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
