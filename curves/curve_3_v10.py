@@ -1,27 +1,22 @@
-# curve_type: parallel_lines_with_perturbations
-# description: Amplitude gradient variation with evenly graduated amplitudes
+# curve_type: serpentine_sinusoidal
+# description: Ultra-conservative amplitude, 30% below current minimum
 import numpy as np
 N = 1000
 # --- parameters ---
-num_lines = 300
-x_amp_1 = 0.010
-x_freq_1 = 19
-x_amp_2 = 0.005
-x_freq_2 = 37
-y_amp_1 = 0.008
-y_freq_1 = 23
-y_amp_2 = 0.004
-y_freq_2 = 41
-coupled_amp = 0.003
-coupled_freq = 13
-# --- generation ---
-x = np.linspace(0, 1, num_lines)
-y = np.linspace(0, 1, num_lines)
-x += x_amp_1 * np.sin(2 * np.pi * x_freq_1 * x)
-x += x_amp_2 * np.sin(2 * np.pi * x_freq_2 * x)
-y += y_amp_1 * np.sin(2 * np.pi * y_freq_1 * y)
-y += y_amp_2 * np.sin(2 * np.pi * y_freq_2 * y)
-x += coupled_amp * np.sin(2 * np.pi * coupled_freq * (x + y))
+num_lines = 350
+x_amp = 0.0035
+y_amp = 0.002
+x_freq = 20
+y_freq = 25
+# --- curve generation ---
+t = np.linspace(0, 1, N)
+line_progress = t * num_lines
+line_index = np.floor(line_progress)
+within_line = line_progress - line_index
+x = np.where(line_index % 2 == 0, within_line, 1 - within_line)
+y = line_index / num_lines
+x += x_amp * np.sin(2 * np.pi * x_freq * t)
+y += y_amp * np.sin(2 * np.pi * y_freq * t)
 x = np.clip(x, 0, 1)
 y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
