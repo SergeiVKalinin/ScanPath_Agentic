@@ -1,33 +1,39 @@
-# curve_type: multi_weighted_adaptive_serpentine
-# description: Enhanced adaptive serpentine with center_weight=2.2 and edge protection
+# curve_type: variable_density_serpentine
+# description: Serpentine with adaptive line spacing for regional density control
 import numpy as np
-N = 1000
+N = 10000
 # --- parameters ---
-num_lines = 95
-center_weight = 2.2
-edge_threshold = 0.5
+total_lines = 120
+dense_spacing_factor = 1.5  # increase density in first/last 30%
+transition_smoothness = 0.05  # smooth blending
 
-y_positions = np.linspace(0, 1, num_lines)
-normalized_y = (y_positions - 0.5) / 0.5
-weights = 1 + center_weight * (1 - 4 * (normalized_y ** 2))
-weights = np.maximum(weights, edge_threshold)
-weights = weights / np.sum(weights)
+t = np.linspace(0, 1, N)
 
-points_per_line = (weights * N).astype(int)
-points_per_line[-1] += N - np.sum(points_per_line)
+# define variable line spacing function
+def line_position(t_val):
+    if t_val < 0.3:
+        # denser in first 30%
+        return t_val * 0.3 * dense_spacing_factor
+    elif t_val < 0.7:
+        # normal spacing in middle 40%
+        return 0.3 * dense_spacing_factor + (t_val - 0.3) * 0.4
+    else:
+        # denser in last 30%
+        return 0.3 * dense_spacing_factor + 0.4 + (t_val - 0.7) * 0.3 * dense_spacing_factor
 
-x_coords = []
-y_coords = []
+# vectorize and apply
+line_pos = np.array([line_position(tv) for tv in t])
+line_pos = line_pos / line_pos[-1]  # normalize to [0, 1]
 
-for i, (y_val, num_points) in enumerate(zip(y_positions, points_per_line)):
-    if num_points > 0:
-        if i % 2 == 0:
-            x_line = np.linspace(0, 1, num_points)
-        else:
-            x_line = np.linspace(1, 0, num_points)
-        x_coords.extend(x_line)
-        y_coords.extend([y_val] * num_points)
+line_indices = np.floor(line_pos * total_lines).astype(int)
+within_line = (line_pos * total_lines) - line_indices
 
-x = np.array(x_coords)
-y = np.array(y_coords)
+# bidirectional serpentine
+y = line_indices / total_lines
+x = np.where(line_indices % 2 == 0, within_line, 1 - within_line)
+
+# normalize
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
+
 points = np.column_stack([x, y])
