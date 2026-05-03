@@ -1,35 +1,27 @@
-# curve_type: large_prime_exploration
-# description: high frequency primes 41-61 with reduced amplitudes
+# curve_type: serpentine_sinusoidal
+# description: Amplitude ratio refinement - 1.67 ratio maintained between top performers
 import numpy as np
 N = 1000
 # --- parameters ---
-num_lines = 300
-t = np.linspace(0, 1, N)
-# base grid
-x = np.repeat(np.linspace(0, 1, num_lines), N // num_lines + 1)[:N]
-y = np.tile(np.linspace(0, 1, num_lines), N // num_lines + 1)[:N]
-# large prime frequencies
-freq_x1 = 41
-freq_x2 = 43
-freq_y1 = 47
-freq_y2 = 53
-freq_coupled = 41
-# reduced amplitudes for high frequencies
-x_amp_1 = 0.006
-x_amp_2 = 0.0025
-y_amp_1 = 0.006
-y_amp_2 = 0.0025
-coupled_amp = 0.003
-# apply perturbations
-x = x + x_amp_1 * np.sin(2 * np.pi * freq_x1 * y)
-x = x + x_amp_2 * np.sin(2 * np.pi * freq_x2 * y)
-y = y + y_amp_1 * np.sin(2 * np.pi * freq_y1 * x)
-y = y + y_amp_2 * np.sin(2 * np.pi * freq_y2 * x)
-# coupled perturbation
-coupled_perturbation = coupled_amp * np.sin(2 * np.pi * freq_coupled * (x + y))
-x = x + coupled_perturbation
-y = y + coupled_perturbation
-# normalize
+num_lines = 350
+x_amp = 0.0055  # split difference between curve_1_v7 and curve_2_v7
+y_amp = 0.0033  # maintain 1.67 amplitude ratio
+x_freq = 19
+y_freq = 24
+# --- generation ---
+x = np.zeros(N)
+y = np.zeros(N)
+for i in range(N):
+    t = i / (N - 1)
+    line_idx = t * num_lines
+    line_progress = (line_idx % 1.0)
+    if int(line_idx) % 2 == 0:
+        x_base = line_progress
+    else:
+        x_base = 1.0 - line_progress
+    y_base = int(line_idx) / num_lines
+    x[i] = x_base + x_amp * np.sin(2 * np.pi * x_freq * t)
+    y[i] = y_base + y_amp * np.sin(2 * np.pi * y_freq * t)
 x = np.clip(x, 0, 1)
 y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
