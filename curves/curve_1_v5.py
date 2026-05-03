@@ -1,16 +1,20 @@
-# curve_type: quantized_archimedean_spiral
-# description: Archimedean spiral with angle quantization for improved uniformity
+# curve_type: serpentine_sinusoidal
+# description: Micro-amplitude exploration with 350 lines, ultra-low perturbations
 import numpy as np
 N = 1000
 # --- parameters ---
-num_turns = 65
-num_discrete_angles = 120
-# --- curve generation ---
-max_theta = num_turns * 2 * np.pi
-theta_continuous = np.linspace(0, max_theta, N)
-angle_step = 2 * np.pi / num_discrete_angles
-theta = np.round(theta_continuous / angle_step) * angle_step
-r = theta / max_theta
-x = 0.5 + 0.5 * r * np.cos(theta)
-y = 0.5 + 0.5 * r * np.sin(theta)
+num_lines = 350
+x_amp = 0.006
+y_amp = 0.004
+x_freq = 21
+y_freq = 25
+t = np.linspace(0, 1, N)
+line_indices = np.floor(t * num_lines).astype(int)
+line_progress = (t * num_lines) % 1
+x = np.where(line_indices % 2 == 0, line_progress, 1 - line_progress)
+y = line_indices / num_lines
+x += x_amp * np.sin(2 * np.pi * x_freq * t)
+y += y_amp * np.sin(2 * np.pi * y_freq * t)
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
