@@ -1,31 +1,25 @@
-# curve_type: raster
-# description: Interlaced raster scan (odd/even lines)
+# curve_type: circular
+# description: Concentric circles with perpendicular sinusoidal wobble
 import numpy as np
-N = 10000
+N = 12000
 # --- parameters ---
-num_lines = 100  # number of scan lines
-points_per_line = N // num_lines
+num_circles = 8
+wobble_amplitude = 0.08  # 8% perpendicular wobble
+wobble_frequency = 40  # wobble cycles
 
-x = np.zeros(N)
-y = np.zeros(N)
-
-# First pass: odd lines
-half_lines = num_lines // 2
-points_per_pass = N // 2
-
-for i in range(half_lines):
-    start_idx = i * points_per_line
-    end_idx = start_idx + points_per_line
-    line_num = 2 * i
-    x[start_idx:end_idx] = np.linspace(0, 1, points_per_line)
-    y[start_idx:end_idx] = line_num / (num_lines - 1)
-
-# Second pass: even lines
-for i in range(half_lines):
-    start_idx = points_per_pass + i * points_per_line
-    end_idx = start_idx + points_per_line
-    line_num = 2 * i + 1
-    x[start_idx:end_idx] = np.linspace(0, 1, points_per_line)
-    y[start_idx:end_idx] = line_num / (num_lines - 1)
-
+t = np.linspace(0, 1, N)
+# Main concentric circles (spiral inward)
+circle_idx = np.floor(t * num_circles)
+radius = 0.5 * (1 - circle_idx / num_circles)
+theta = 2 * np.pi * (t * num_circles - circle_idx)
+# Base circular path
+x = 0.5 + radius * np.cos(theta)
+y = 0.5 + radius * np.sin(theta)
+# Add perpendicular wobble (tangent direction)
+wobble = wobble_amplitude * np.sin(2 * np.pi * wobble_frequency * t)
+x += wobble * (-np.sin(theta))
+y += wobble * np.cos(theta)
+# Normalize
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
