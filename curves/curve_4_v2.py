@@ -1,48 +1,44 @@
-# curve_type: serpentine
-# description: Triple-density serpentine with aggressive center focus
+# curve_type: serpentine_with_higher_prime_frequencies
+# description: Higher prime frequencies (29-53 range) with same amplitude structure as top performer
 import numpy as np
-N = 10000
+N = 1000
 # --- parameters ---
-total_lines = 150
-# Distribution: 30 bottom, 90 middle, 30 top
-lines_bottom = 30
-lines_middle = 90
-lines_top = 30
-# Allocate points proportionally to line density
-points_bottom = N // 6  # sparse region
-points_middle = 4 * N // 6  # dense region (4x)
-points_top = N // 6  # sparse region
-# Adjust for exact N
-points_middle += N - (points_bottom + points_middle + points_top)
-# Bottom third (0 to 0.33)
+num_lines = 300
+x_primary_amp = 0.010
+y_primary_amp = 0.006
+x_secondary_amp = 0.008
+y_secondary_amp = 0.005
+x_tertiary_amp = 0.004
+coupled_amp = 0.004
+x_primary_freq = 29
+y_primary_freq = 37
+x_secondary_freq = 41
+y_secondary_freq = 43
+x_tertiary_freq = 47
+coupled_freq = 31
+
 points_list = []
-ppl_bottom = points_bottom // lines_bottom
-for i in range(lines_bottom):
-    y_coord = 0.33 * i / (lines_bottom - 1)
+for i in range(num_lines):
+    y_base = i / (num_lines - 1)
     if i % 2 == 0:
-        x_coords = np.linspace(0, 1, ppl_bottom)
+        x_base = np.linspace(0, 1, N // num_lines)
     else:
-        x_coords = np.linspace(1, 0, ppl_bottom)
-    y_coords = np.full(ppl_bottom, y_coord)
-    points_list.append(np.column_stack([x_coords, y_coords]))
-# Middle third (0.33 to 0.67)
-ppl_middle = points_middle // lines_middle
-for i in range(lines_middle):
-    y_coord = 0.33 + 0.34 * i / (lines_middle - 1)
-    if (lines_bottom + i) % 2 == 0:
-        x_coords = np.linspace(0, 1, ppl_middle)
-    else:
-        x_coords = np.linspace(1, 0, ppl_middle)
-    y_coords = np.full(ppl_middle, y_coord)
-    points_list.append(np.column_stack([x_coords, y_coords]))
-# Top third (0.67 to 1.0)
-ppl_top = points_top // lines_top
-for i in range(lines_top):
-    y_coord = 0.67 + 0.33 * i / (lines_top - 1)
-    if (lines_bottom + lines_middle + i) % 2 == 0:
-        x_coords = np.linspace(0, 1, ppl_top)
-    else:
-        x_coords = np.linspace(1, 0, ppl_top)
-    y_coords = np.full(ppl_top, y_coord)
-    points_list.append(np.column_stack([x_coords, y_coords]))
+        x_base = np.linspace(1, 0, N // num_lines)
+    
+    t = np.linspace(0, 1, len(x_base))
+    
+    x_pert = (x_primary_amp * np.sin(2 * np.pi * x_primary_freq * t) +
+              x_secondary_amp * np.sin(2 * np.pi * x_secondary_freq * t) +
+              x_tertiary_amp * np.sin(2 * np.pi * x_tertiary_freq * t))
+    
+    y_pert = (y_primary_amp * np.sin(2 * np.pi * y_primary_freq * t) +
+              y_secondary_amp * np.sin(2 * np.pi * y_secondary_freq * t))
+    
+    coupled_pert = coupled_amp * np.sin(2 * np.pi * coupled_freq * (x_base + y_base))
+    
+    x = np.clip(x_base + x_pert + coupled_pert, 0, 1)
+    y = np.clip(np.full_like(x_base, y_base) + y_pert + coupled_pert, 0, 1)
+    
+    points_list.append(np.column_stack([x, y]))
+
 points = np.vstack(points_list)
