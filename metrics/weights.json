@@ -1,0 +1,5 @@
+{
+  "metric_uniform_sample_density.py": 0.5,
+  "metric_time_uniformity.py": 0.3,
+  "metric_smoothness.py": 0.2
+}
