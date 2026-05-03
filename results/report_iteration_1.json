@@ -10,6 +10,26 @@
       "total_score": 0.778
     },
     {
+      "curve": "curve_5_v2.py",
+      "total_score": 0.778
+    },
+    {
+      "curve": "curve_1_v3.py",
+      "total_score": 0.776
+    },
+    {
+      "curve": "curve_4_v3.py",
+      "total_score": 0.75
+    },
+    {
+      "curve": "curve_3_v2.py",
+      "total_score": 0.732
+    },
+    {
+      "curve": "curve_2_v2.py",
+      "total_score": 0.703
+    },
+    {
       "curve": "curve_1_v1.py",
       "total_score": 0.7
     },
@@ -18,11 +38,23 @@
       "total_score": 0.7
     },
     {
+      "curve": "curve_5_v3.py",
+      "total_score": 0.694
+    },
+    {
+      "curve": "curve_2_v3.py",
+      "total_score": 0.689
+    },
+    {
       "curve": "curve_5_v1.py",
       "total_score": 0.682
     },
     {
       "curve": "curve_11_v1.py",
+      "total_score": 0.673
+    },
+    {
+      "curve": "curve_1_v2.py",
       "total_score": 0.673
     },
     {
@@ -48,12 +80,20 @@
     {
       "curve": "curve_6_v1.py",
       "total_score": 0.632
+    },
+    {
+      "curve": "curve_4_v2.py",
+      "total_score": 0.48
+    },
+    {
+      "curve": "curve_3_v3.py",
+      "total_score": 0.465
     }
   ],
   "top3": [
     "curve_2_v1.py",
     "curve_12_v1.py",
-    "curve_1_v1.py"
+    "curve_5_v2.py"
   ],
   "scores": {
     "curve_10_v1.py": {
@@ -76,25 +116,75 @@
       "metric_time_uniformity.py": 0.0,
       "metric_uniform_sample_density.py": 1.0
     },
+    "curve_1_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.648,
+      "metric_uniform_sample_density.py": 0.957
+    },
+    "curve_1_v3.py": {
+      "metric_smoothness.py": 0.607,
+      "metric_time_uniformity.py": 0.593,
+      "metric_uniform_sample_density.py": 0.954
+    },
     "curve_2_v1.py": {
       "metric_smoothness.py": 0.0,
       "metric_time_uniformity.py": 0.969,
       "metric_uniform_sample_density.py": 1.0
+    },
+    "curve_2_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.722,
+      "metric_uniform_sample_density.py": 0.972
+    },
+    "curve_2_v3.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.734,
+      "metric_uniform_sample_density.py": 0.937
     },
     "curve_3_v1.py": {
       "metric_smoothness.py": 1.0,
       "metric_time_uniformity.py": 0.0,
       "metric_uniform_sample_density.py": 0.912
     },
+    "curve_3_v2.py": {
+      "metric_smoothness.py": 0.402,
+      "metric_time_uniformity.py": 0.583,
+      "metric_uniform_sample_density.py": 0.954
+    },
+    "curve_3_v3.py": {
+      "metric_smoothness.py": 0.01,
+      "metric_time_uniformity.py": 0.0,
+      "metric_uniform_sample_density.py": 0.925
+    },
     "curve_4_v1.py": {
       "metric_smoothness.py": 0.998,
       "metric_time_uniformity.py": 0.0,
       "metric_uniform_sample_density.py": 1.0
     },
+    "curve_4_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.186,
+      "metric_uniform_sample_density.py": 0.849
+    },
+    "curve_4_v3.py": {
+      "metric_smoothness.py": 0.544,
+      "metric_time_uniformity.py": 0.566,
+      "metric_uniform_sample_density.py": 0.943
+    },
     "curve_5_v1.py": {
       "metric_smoothness.py": 1.0,
       "metric_time_uniformity.py": 0.0,
       "metric_uniform_sample_density.py": 0.964
+    },
+    "curve_5_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.971,
+      "metric_uniform_sample_density.py": 0.974
+    },
+    "curve_5_v3.py": {
+      "metric_smoothness.py": 0.201,
+      "metric_time_uniformity.py": 0.589,
+      "metric_uniform_sample_density.py": 0.955
     },
     "curve_6_v1.py": {
       "metric_smoothness.py": 0.0,
@@ -117,5 +207,5 @@
       "metric_uniform_sample_density.py": 0.919
     }
   },
-  "feedback": "# Message to Agent 1: Generate 5 New Curve Variations\n\n## Analysis of Top 3 Performers\n\nI've identified the top 3 curves from the current generation. Here's what makes them successful:\n\n**1. curve_2_v1.py (Score: 0.791) - BEST OVERALL**\n- **Bidirectional serpentine raster** with `num_lines = 100`\n- Strengths: Perfect uniform sample density (1.0), excellent time uniformity (0.969)\n- Key insight: The serpentine pattern eliminates flyback by reversing direction on alternate lines, achieving near-perfect time uniformity while maintaining sample density\n\n**2. curve_12_v1.py (Score: 0.778)**\n- **Fermat spiral** with `num_turns = 50`\n- Balanced performance across all metrics: smoothness (0.534), time uniformity (0.645), sample density (0.955)\n- Uses parabolic spacing: `r = sqrt(theta / (num_turns * 2 * pi))`\n\n**3. curve_1_v1.py (Score: 0.700)**\n- **Unidirectional raster** with `num_lines = 100`\n- Perfect smoothness (1.0) and sample density (1.0), but zero time uniformity due to flyback jumps\n\n## Key Patterns Identified\n\n1. **Serpentine patterns eliminate discontinuities** while maintaining structure\n2. **100 scan lines** appears optimal for N=10000 (100 points/line)\n3. **Spiral patterns benefit from ~50 turns** for good coverage\n4. Raster approaches achieve perfect sample density but vary in time uniformity\n\n## Instructions: Generate 5 New Variations\n\nCreate exactly 5 new curves exploring these specific directions:\n\n**Variation 1: Hybrid Serpentine-Spiral**\n- Start with serpentine raster structure but gradually transition to spiral in outer regions\n- Parameters: `num_lines = 100`, `spiral_blend_factor = 0.3`, transition starting at y > 0.6\n\n**Variation 2: Optimized Serpentine Density**\n- Bidirectional serpentine with variable line spacing to improve time uniformity further\n- Parameters: `num_lines` range 80-120, experiment with non-uniform line spacing (denser at edges)\n\n**Variation 3: Multi-Scale Fermat Spiral**\n- Fermat spiral with `num_turns` between 40-60\n- Add slight perturbation to radius: `r = sqrt(theta/norm) * (1 + 0.05*sin(k*theta))` where k \u2208 [3, 8]\n\n**Variation 4: Diagonal Serpentine**\n- Rotate the serpentine concept by 45 degrees, scanning diagonally\n- Parameters: `num_lines = 100`, maintain bidirectional reversal pattern\n\n**Variation 5: Adaptive Density Raster**\n- Bidirectional serpentine where `points_per_line` varies: denser in center, sparser at edges\n- Total lines: 100, but redistribute points with quadratic weighting toward center lines\n\n## Parameter Constraints\n- Always use N = 10000 total points\n- Keep points in [0,1] \u00d7 [0,1] domain\n- For serpentine patterns: maintain the `if i % 2 == 0` reversal logic\n- For spirals: keep `num_turns` in range [40, 60]\n- Prioritize maintaining high sample density (>0.95) and time uniformity (>0.7)\n\nGenerate these 5 curves now. Focus on combining the serpentine's excellent time uniformity with variations that might improve the smoothness metric further."
+  "feedback": "# Message to Agent 1: Generate Next 5 Curve Variations\n\n## Analysis of Top 3 Performers\n\nBased on the evaluation results, I've identified critical patterns in our best-performing curves:\n\n**Key Finding: Raster-based patterns dominate performance**\n\n1. **curve_2_v1.py (Score: 0.791)** - Simple bidirectional serpentine\n   - Perfect sample density (1.0) and excellent time uniformity (0.969)\n   - Uses 100 scan lines with 100 points per line\n   - Zero smoothness score, but compensated by exceptional uniformity\n\n2. **curve_12_v1.py (Score: 0.778)** - Fermat spiral\n   - Balanced performance with moderate smoothness (0.534)\n   - 50 turns with sqrt(theta) radius scaling\n   - Good sample density (0.955) with reasonable uniformity (0.645)\n\n3. **curve_5_v2.py (Score: 0.778)** - Adaptive center-weighted serpentine\n   - Near-perfect uniformity (0.971) and density (0.974)\n   - Uses quadratic weighting: `1 + 2.0 * (1 - 4 * (normalized - 0.5)^2)`\n   - Allocates 2-3x more points to center scan lines\n\n## Critical Success Patterns\n\n1. **Serpentine > Unidirectional**: Bidirectional scanning eliminates large jumps\n2. **Dense line packing**: 100 lines performs better than sparse alternatives\n3. **Adaptive density works**: Center-weighting improves metrics without sacrificing uniformity\n4. **Spiral potential**: Fermat spiral's smoothness advantage (0.534) suggests smooth curves can compete\n\n## Instructions: Generate 5 New Variations\n\n### Variation 1: Denser Serpentine\n- Increase `num_lines` to 150-200\n- Keep bidirectional serpentine pattern\n- Hypothesis: Higher line density may improve smoothness without sacrificing other metrics\n\n### Variation 2: Edge-Weighted Serpentine\n- Mirror curve_5_v2.py but invert the weighting\n- Use: `weights = 1 + 2.0 * (4 * (normalized - 0.5)^2)` (peaks at edges)\n- Keep 100 lines, bidirectional scanning\n- Hypothesis: Test if edge emphasis affects coverage differently\n\n### Variation 3: Hybrid Spiral-Raster\n- Start with Fermat spiral for outer 60% of points (theta: 0 to 30*2*pi)\n- Transition to dense serpentine for inner 40% (50 lines in center region r < 0.4)\n- Hypothesis: Combine spiral's smoothness with raster's uniformity in high-density center\n\n### Variation 4: Double-Density Center Serpentine\n- Use 150 total scan lines\n- Bottom third (0-0.33): 30 lines, evenly spaced\n- Middle third (0.33-0.67): 90 lines, tightly packed\n- Top third (0.67-1.0): 30 lines, evenly spaced\n- All bidirectional\n- Hypothesis: Aggressive center focus may optimize time uniformity further\n\n### Variation 5: Archimedean Spiral with Optimized Turns\n- Use linear spacing: `r = theta / (num_turns * 2 * np.pi)`\n- Set `num_turns = 70` (between Fermat's 50 and typical high values)\n- Add slight perturbation: `r = r * (1 + 0.02 * np.sin(10 * theta))` for density variation\n- Hypothesis: Linear spiral with controlled turns may balance all three metrics better than Fermat\n\n## Parameter Constraints\n- Maintain N = 10000 points\n- Ensure all x, y \u2208 [0, 1]\n- For serpentine: `points_per_line = N // num_lines`\n- For spirals: center at (0.5, 0.5), max radius = 0.5\n\nGenerate these 5 curves with clear documentation of parameter choices. Focus on"
 }
