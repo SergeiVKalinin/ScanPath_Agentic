@@ -1,41 +1,27 @@
-# curve_type: triple_cross_coupling
-# description: three coupled terms with sum, difference, and product interactions
+# curve_type: serpentine_sinusoidal
+# description: Frequency microstep - larger frequency separation for time uniformity
 import numpy as np
 N = 1000
 # --- parameters ---
-num_lines = 300
-t = np.linspace(0, 1, N)
-# base grid
-x = np.repeat(np.linspace(0, 1, num_lines), N // num_lines + 1)[:N]
-y = np.tile(np.linspace(0, 1, num_lines), N // num_lines + 1)[:N]
-# moderate prime frequencies
-freq_x1 = 17
-freq_x2 = 23
-freq_y1 = 29
-freq_y2 = 31
-freq_coupled_1 = 13
-freq_coupled_2 = 19
-freq_coupled_3 = 23
-# amplitudes
-x_amp_1 = 0.008
-x_amp_2 = 0.003
-y_amp_1 = 0.008
-y_amp_2 = 0.003
-coupled_amp_1 = 0.004
-coupled_amp_2 = 0.003
-coupled_amp_3 = 0.002
-# apply perturbations
-x = x + x_amp_1 * np.sin(2 * np.pi * freq_x1 * y)
-x = x + x_amp_2 * np.sin(2 * np.pi * freq_x2 * y)
-y = y + y_amp_1 * np.sin(2 * np.pi * freq_y1 * x)
-y = y + y_amp_2 * np.sin(2 * np.pi * freq_y2 * x)
-# triple coupled perturbations
-coupled_1 = coupled_amp_1 * np.sin(2 * np.pi * freq_coupled_1 * (x + y))
-coupled_2 = coupled_amp_2 * np.sin(2 * np.pi * freq_coupled_2 * (x - y))
-coupled_3 = coupled_amp_3 * np.sin(2 * np.pi * freq_coupled_3 * (x * y))
-x = x + coupled_1 + coupled_2 + coupled_3
-y = y + coupled_1 - coupled_2 + coupled_3
-# normalize
+num_lines = 350
+x_amp = 0.005  # match best performer
+y_amp = 0.003  # match best performer
+x_freq = 19
+y_freq = 25  # increased gap to 6 units
+# --- generation ---
+x = np.zeros(N)
+y = np.zeros(N)
+for i in range(N):
+    t = i / (N - 1)
+    line_idx = t * num_lines
+    line_progress = (line_idx % 1.0)
+    if int(line_idx) % 2 == 0:
+        x_base = line_progress
+    else:
+        x_base = 1.0 - line_progress
+    y_base = int(line_idx) / num_lines
+    x[i] = x_base + x_amp * np.sin(2 * np.pi * x_freq * t)
+    y[i] = y_base + y_amp * np.sin(2 * np.pi * y_freq * t)
 x = np.clip(x, 0, 1)
 y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
