@@ -1,30 +1,26 @@
-# curve_type: variable_density_bidirectional_raster
-# description: Bidirectional raster with sinusoidal line density variation, denser at x=0.25 and x=0.75
+# curve_type: logarithmic_spiral
+# description: Exponential spacing spiral as alternative to Fermat parabolic
 import numpy as np
-N = 1000
+N = 10000
 # --- parameters ---
-num_lines = 100
-density_peaks = 2
+num_turns = 10
+b = 0.17  # exponential growth rate
+center_x = 0.5
+center_y = 0.5
 
-y_positions = np.linspace(0, 1, num_lines)
-line_density = 1 + 0.5 * np.sin(density_peaks * 2 * np.pi * y_positions)
-line_density = line_density / np.sum(line_density)
+theta = np.linspace(0, num_turns * 2 * np.pi, N)
+r = np.exp(b * theta)
 
-points_per_line = (line_density * N).astype(int)
-points_per_line[-1] += N - np.sum(points_per_line)
+# normalize to fit within unit circle
+r_max = np.exp(b * num_turns * 2 * np.pi)
+r = r / r_max * 0.5  # scale to radius 0.5
 
-x_coords = []
-y_coords = []
+# convert to Cartesian
+x = center_x + r * np.cos(theta)
+y = center_y + r * np.sin(theta)
 
-for i, (y_val, num_points) in enumerate(zip(y_positions, points_per_line)):
-    if num_points > 0:
-        if i % 2 == 0:
-            x_line = np.linspace(0, 1, num_points)
-        else:
-            x_line = np.linspace(1, 0, num_points)
-        x_coords.extend(x_line)
-        y_coords.extend([y_val] * num_points)
+# ensure [0, 1] bounds
+x = np.clip(x, 0, 1)
+y = np.clip(y, 0, 1)
 
-x = np.array(x_coords)
-y = np.array(y_coords)
 points = np.column_stack([x, y])
