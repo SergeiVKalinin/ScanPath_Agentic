@@ -1,33 +1,43 @@
-# curve_type: hybrid
-# description: Fermat spiral outer region transitioning to dense serpentine center
+# curve_type: serpentine_with_asymmetric_amplitude
+# description: Asymmetric amplitude exploration with x_primary_amp=0.011 and y_primary_amp=0.005
 import numpy as np
-N = 10000
+N = 1000
 # --- parameters ---
-outer_fraction = 0.60  # 60% points in spiral
-inner_fraction = 0.40  # 40% points in raster
-n_spiral = int(N * outer_fraction)
-n_raster = N - n_spiral
-# Fermat spiral for outer region
-num_turns_spiral = 30
-theta_spiral = np.linspace(0, num_turns_spiral * 2 * np.pi, n_spiral)
-r_spiral = np.sqrt(theta_spiral / (num_turns_spiral * 2 * np.pi)) * 0.5
-x_spiral = 0.5 + r_spiral * np.cos(theta_spiral)
-y_spiral = 0.5 + r_spiral * np.sin(theta_spiral)
-# Dense serpentine for center (r < 0.4)
-num_lines_center = 50
-points_per_line_center = n_raster // num_lines_center
-center_points_list = []
-for i in range(num_lines_center):
-    # Map to center region [0.1, 0.9] x [0.1, 0.9]
-    y_coord = 0.1 + 0.8 * i / (num_lines_center - 1)
+num_lines = 300
+x_primary_amp = 0.011
+y_primary_amp = 0.005
+x_secondary_amp = 0.008
+y_secondary_amp = 0.006
+x_tertiary_amp = 0.004
+y_tertiary_amp = 0.003
+x_primary_freq = 17
+y_primary_freq = 23
+x_secondary_freq = 29
+y_secondary_freq = 31
+x_tertiary_freq = 37
+y_tertiary_freq = 41
+
+points_list = []
+for i in range(num_lines):
+    y_base = i / (num_lines - 1)
     if i % 2 == 0:
-        x_coords = np.linspace(0.1, 0.9, points_per_line_center)
+        x_base = np.linspace(0, 1, N // num_lines)
     else:
-        x_coords = np.linspace(0.9, 0.1, points_per_line_center)
-    y_coords = np.full(points_per_line_center, y_coord)
-    center_points_list.append(np.column_stack([x_coords, y_coords]))
-raster_points = np.vstack(center_points_list)
-# Combine spiral then raster
-x = np.concatenate([x_spiral, raster_points[:, 0]])
-y = np.concatenate([y_spiral, raster_points[:, 1]])
-points = np.column_stack([x, y])
+        x_base = np.linspace(1, 0, N // num_lines)
+    
+    t = np.linspace(0, 1, len(x_base))
+    
+    x_pert = (x_primary_amp * np.sin(2 * np.pi * x_primary_freq * t) +
+              x_secondary_amp * np.sin(2 * np.pi * x_secondary_freq * t) +
+              x_tertiary_amp * np.sin(2 * np.pi * x_tertiary_freq * t))
+    
+    y_pert = (y_primary_amp * np.sin(2 * np.pi * y_primary_freq * t) +
+              y_secondary_amp * np.sin(2 * np.pi * y_secondary_freq * t) +
+              y_tertiary_amp * np.sin(2 * np.pi * y_tertiary_freq * t))
+    
+    x = np.clip(x_base + x_pert, 0, 1)
+    y = np.clip(np.full_like(x_base, y_base) + y_pert, 0, 1)
+    
+    points_list.append(np.column_stack([x, y]))
+
+points = np.vstack(points_list)
