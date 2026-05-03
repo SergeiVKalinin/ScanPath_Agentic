@@ -1,34 +1,39 @@
-# curve_type: hybrid_raster_spiral
-# description: Serpentine with radial modulation for smooth spiral-like transitions
+# curve_type: serpentine_with_enhanced_coupling
+# description: Enhanced coupling with dual coupled terms using primes 13 and 11
 import numpy as np
-N = 10000
+N = 1000
 # --- parameters ---
-num_lines = 125  # optimal range for density
-radial_amplitude = 0.035  # modulation strength
-radial_frequency = 3.0  # spiral-like cycles
-
+num_lines = 300
 t = np.linspace(0, 1, N)
-line_indices = np.floor(t * num_lines).astype(int)
-within_line = (t * num_lines) - line_indices
-
-# base serpentine pattern
-y = line_indices / num_lines
-x = np.where(line_indices % 2 == 0, within_line, 1 - within_line)
-
-# add radial modulation for smoothness
-center_x, center_y = 0.5, 0.5
-dx = x - center_x
-dy = y - center_y
-radius = np.sqrt(dx**2 + dy**2)
-angle = np.arctan2(dy, dx)
-
-# apply smooth radial perturbation
-modulation = radial_amplitude * np.sin(radial_frequency * angle) * radius
-x = x + modulation * np.cos(angle)
-y = y + modulation * np.sin(angle)
-
-# normalize to [0, 1]
+# Base serpentine pattern
+line_idx = np.floor(t * num_lines)
+x = (t * num_lines) % 1
+y = line_idx / num_lines
+# Reverse every other line
+reverse_mask = (line_idx % 2 == 1)
+x[reverse_mask] = 1 - x[reverse_mask]
+# Primary perturbations
+x_amp_1 = 0.008
+x_freq_1 = 17
+x_amp_2 = 0.003
+x_freq_2 = 31
+y_amp_1 = 0.007
+y_freq_1 = 23
+y_amp_2 = 0.003
+y_freq_2 = 29
+# Coupled perturbations
+coupled_amp = 0.004
+coupled_freq = 13
+coupled_amp_2 = 0.003
+coupled_freq_2 = 11
+# Apply perturbations
+x = x + x_amp_1 * np.sin(2 * np.pi * x_freq_1 * t)
+x = x + x_amp_2 * np.sin(2 * np.pi * x_freq_2 * t)
+y = y + y_amp_1 * np.sin(2 * np.pi * y_freq_1 * t)
+y = y + y_amp_2 * np.sin(2 * np.pi * y_freq_2 * t)
+x = x + coupled_amp * np.sin(2 * np.pi * coupled_freq * (x + y))
+y = y + coupled_amp_2 * np.sin(2 * np.pi * coupled_freq_2 * (x - y))
+# Normalize to [0, 1]
 x = np.clip(x, 0, 1)
 y = np.clip(y, 0, 1)
-
 points = np.column_stack([x, y])
