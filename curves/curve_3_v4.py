@@ -1,20 +1,32 @@
-# curve_type: hybrid_spiral_raster
-# description: Fermat spiral with quantized angles combining spiral smoothness and raster uniformity
+# curve_type: serpentine_minimal_perturbation
+# description: 350 lines with ultra-low amplitudes and non-prime frequencies
 import numpy as np
-N = 10000
+N = 1000
 # --- parameters ---
-num_turns = 60
-num_discrete_angles = 120
-max_theta = num_turns * 2 * np.pi
+num_lines = 350
+x_amp = 0.008
+y_amp = 0.005
+x_freq = 20
+y_freq = 24
 
-theta_continuous = np.linspace(0, max_theta, N)
-angle_step = 2 * np.pi / num_discrete_angles
-theta = np.round(theta_continuous / angle_step) * angle_step
+t = np.linspace(0, 1, N)
+x = np.zeros(N)
+y = np.zeros(N)
 
-r = np.sqrt(theta / max_theta)
+for i in range(N):
+    line_idx = int(t[i] * num_lines)
+    pos_in_line = (t[i] * num_lines) % 1.0
+    
+    if line_idx % 2 == 0:
+        x[i] = pos_in_line
+    else:
+        x[i] = 1.0 - pos_in_line
+    
+    y[i] = line_idx / num_lines
+    
+    x[i] += x_amp * np.sin(2 * np.pi * x_freq * t[i])
+    y[i] += y_amp * np.sin(2 * np.pi * y_freq * t[i])
 
-x = 0.5 + 0.5 * r * np.cos(theta)
-y = 0.5 + 0.5 * r * np.sin(theta)
 x = np.clip(x, 0, 1)
 y = np.clip(y, 0, 1)
 points = np.column_stack([x, y])
