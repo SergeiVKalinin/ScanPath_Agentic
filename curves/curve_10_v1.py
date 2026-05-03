@@ -1,13 +1,18 @@
 # curve_type: lissajous
-# description: Lissajous curve with frequency ratio 51:50, phase 0
+# description: Lissajous 97:96 ratio, phase=pi/4
 import numpy as np
-N = 25000
+N = 30000
 # --- parameters ---
-fx = 51  # x frequency
-fy = 50  # y frequency
-phase = 0  # phase offset in radians
-# --- generate curve ---
+fx = 97  # x frequency
+fy = 96  # y frequency
+phase = np.pi / 4  # phase offset in radians
+
 t = np.linspace(0, 2 * np.pi * fy, N)
-x = 0.5 + 0.5 * np.sin(fx * t / fy + phase)
-y = 0.5 + 0.5 * np.sin(t)
+x = np.sin(fx * t / fy)
+y = np.sin(t + phase)
+
+# Normalize to [0, 1]
+x = (x + 1) / 2
+y = (y + 1) / 2
+
 points = np.column_stack([x, y])
