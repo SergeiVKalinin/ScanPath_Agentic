@@ -1,0 +1,346 @@
+{
+  "iteration": 6,
+  "ranking": [
+    {
+      "curve": "curve_2_v5.py",
+      "total_score": 0.94
+    },
+    {
+      "curve": "curve_2_v6.py",
+      "total_score": 0.933
+    },
+    {
+      "curve": "curve_5_v5.py",
+      "total_score": 0.845
+    },
+    {
+      "curve": "curve_4_v5.py",
+      "total_score": 0.82
+    },
+    {
+      "curve": "curve_3_v4.py",
+      "total_score": 0.797
+    },
+    {
+      "curve": "curve_3_v6.py",
+      "total_score": 0.797
+    },
+    {
+      "curve": "curve_1_v4.py",
+      "total_score": 0.794
+    },
+    {
+      "curve": "curve_2_v1.py",
+      "total_score": 0.791
+    },
+    {
+      "curve": "curve_12_v1.py",
+      "total_score": 0.778
+    },
+    {
+      "curve": "curve_1_v2.py",
+      "total_score": 0.776
+    },
+    {
+      "curve": "curve_2_v4.py",
+      "total_score": 0.775
+    },
+    {
+      "curve": "curve_2_v2.py",
+      "total_score": 0.774
+    },
+    {
+      "curve": "curve_1_v3.py",
+      "total_score": 0.773
+    },
+    {
+      "curve": "curve_5_v4.py",
+      "total_score": 0.759
+    },
+    {
+      "curve": "curve_1_v6.py",
+      "total_score": 0.755
+    },
+    {
+      "curve": "curve_2_v3.py",
+      "total_score": 0.752
+    },
+    {
+      "curve": "curve_5_v6.py",
+      "total_score": 0.734
+    },
+    {
+      "curve": "curve_4_v3.py",
+      "total_score": 0.718
+    },
+    {
+      "curve": "curve_1_v1.py",
+      "total_score": 0.7
+    },
+    {
+      "curve": "curve_4_v1.py",
+      "total_score": 0.7
+    },
+    {
+      "curve": "curve_5_v1.py",
+      "total_score": 0.682
+    },
+    {
+      "curve": "curve_11_v1.py",
+      "total_score": 0.673
+    },
+    {
+      "curve": "curve_5_v2.py",
+      "total_score": 0.673
+    },
+    {
+      "curve": "curve_3_v2.py",
+      "total_score": 0.662
+    },
+    {
+      "curve": "curve_3_v1.py",
+      "total_score": 0.656
+    },
+    {
+      "curve": "curve_4_v6.py",
+      "total_score": 0.654
+    },
+    {
+      "curve": "curve_1_v5.py",
+      "total_score": 0.651
+    },
+    {
+      "curve": "curve_3_v5.py",
+      "total_score": 0.637
+    },
+    {
+      "curve": "curve_7_v1.py",
+      "total_score": 0.633
+    },
+    {
+      "curve": "curve_8_v1.py",
+      "total_score": 0.633
+    },
+    {
+      "curve": "curve_9_v1.py",
+      "total_score": 0.633
+    },
+    {
+      "curve": "curve_10_v1.py",
+      "total_score": 0.632
+    },
+    {
+      "curve": "curve_6_v1.py",
+      "total_score": 0.632
+    },
+    {
+      "curve": "curve_4_v2.py",
+      "total_score": 0.619
+    },
+    {
+      "curve": "curve_4_v4.py",
+      "total_score": 0.602
+    },
+    {
+      "curve": "curve_3_v3.py",
+      "total_score": 0.589
+    },
+    {
+      "curve": "curve_5_v3.py",
+      "total_score": 0.577
+    }
+  ],
+  "top3": [
+    "curve_2_v5.py",
+    "curve_2_v6.py",
+    "curve_5_v5.py"
+  ],
+  "scores": {
+    "curve_10_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.576,
+      "metric_uniform_sample_density.py": 0.92
+    },
+    "curve_11_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.758,
+      "metric_uniform_sample_density.py": 0.891
+    },
+    "curve_12_v1.py": {
+      "metric_smoothness.py": 0.534,
+      "metric_time_uniformity.py": 0.645,
+      "metric_uniform_sample_density.py": 0.955
+    },
+    "curve_1_v1.py": {
+      "metric_smoothness.py": 1.0,
+      "metric_time_uniformity.py": 0.0,
+      "metric_uniform_sample_density.py": 1.0
+    },
+    "curve_1_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.927,
+      "metric_uniform_sample_density.py": 0.995
+    },
+    "curve_1_v3.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.923,
+      "metric_uniform_sample_density.py": 0.993
+    },
+    "curve_1_v4.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.987,
+      "metric_uniform_sample_density.py": 0.996
+    },
+    "curve_1_v5.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.683,
+      "metric_uniform_sample_density.py": 0.891
+    },
+    "curve_1_v6.py": {
+      "metric_smoothness.py": 0.901,
+      "metric_time_uniformity.py": 0.381,
+      "metric_uniform_sample_density.py": 0.92
+    },
+    "curve_2_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.969,
+      "metric_uniform_sample_density.py": 1.0
+    },
+    "curve_2_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.975,
+      "metric_uniform_sample_density.py": 0.964
+    },
+    "curve_2_v3.py": {
+      "metric_smoothness.py": 0.345,
+      "metric_time_uniformity.py": 0.691,
+      "metric_uniform_sample_density.py": 0.951
+    },
+    "curve_2_v4.py": {
+      "metric_smoothness.py": 0.518,
+      "metric_time_uniformity.py": 0.646,
+      "metric_uniform_sample_density.py": 0.955
+    },
+    "curve_2_v5.py": {
+      "metric_smoothness.py": 0.924,
+      "metric_time_uniformity.py": 0.869,
+      "metric_uniform_sample_density.py": 0.99
+    },
+    "curve_2_v6.py": {
+      "metric_smoothness.py": 0.924,
+      "metric_time_uniformity.py": 0.846,
+      "metric_uniform_sample_density.py": 0.99
+    },
+    "curve_3_v1.py": {
+      "metric_smoothness.py": 1.0,
+      "metric_time_uniformity.py": 0.0,
+      "metric_uniform_sample_density.py": 0.912
+    },
+    "curve_3_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.622,
+      "metric_uniform_sample_density.py": 0.95
+    },
+    "curve_3_v3.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.458,
+      "metric_uniform_sample_density.py": 0.904
+    },
+    "curve_3_v4.py": {
+      "metric_smoothness.py": 0.628,
+      "metric_time_uniformity.py": 0.646,
+      "metric_uniform_sample_density.py": 0.955
+    },
+    "curve_3_v5.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.657,
+      "metric_uniform_sample_density.py": 0.88
+    },
+    "curve_3_v6.py": {
+      "metric_smoothness.py": 0.669,
+      "metric_time_uniformity.py": 0.662,
+      "metric_uniform_sample_density.py": 0.929
+    },
+    "curve_4_v1.py": {
+      "metric_smoothness.py": 0.998,
+      "metric_time_uniformity.py": 0.0,
+      "metric_uniform_sample_density.py": 1.0
+    },
+    "curve_4_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.501,
+      "metric_uniform_sample_density.py": 0.937
+    },
+    "curve_4_v3.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.923,
+      "metric_uniform_sample_density.py": 0.883
+    },
+    "curve_4_v4.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.436,
+      "metric_uniform_sample_density.py": 0.943
+    },
+    "curve_4_v5.py": {
+      "metric_smoothness.py": 0.655,
+      "metric_time_uniformity.py": 0.67,
+      "metric_uniform_sample_density.py": 0.976
+    },
+    "curve_4_v6.py": {
+      "metric_smoothness.py": 0.899,
+      "metric_time_uniformity.py": 0.092,
+      "metric_uniform_sample_density.py": 0.893
+    },
+    "curve_5_v1.py": {
+      "metric_smoothness.py": 1.0,
+      "metric_time_uniformity.py": 0.0,
+      "metric_uniform_sample_density.py": 0.964
+    },
+    "curve_5_v2.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.759,
+      "metric_uniform_sample_density.py": 0.891
+    },
+    "curve_5_v3.py": {
+      "metric_smoothness.py": 0.662,
+      "metric_time_uniformity.py": 0.514,
+      "metric_uniform_sample_density.py": 0.581
+    },
+    "curve_5_v4.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.946,
+      "metric_uniform_sample_density.py": 0.95
+    },
+    "curve_5_v5.py": {
+      "metric_smoothness.py": 0.912,
+      "metric_time_uniformity.py": 0.624,
+      "metric_uniform_sample_density.py": 0.952
+    },
+    "curve_5_v6.py": {
+      "metric_smoothness.py": 0.952,
+      "metric_time_uniformity.py": 0.295,
+      "metric_uniform_sample_density.py": 0.91
+    },
+    "curve_6_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.575,
+      "metric_uniform_sample_density.py": 0.92
+    },
+    "curve_7_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.576,
+      "metric_uniform_sample_density.py": 0.919
+    },
+    "curve_8_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.576,
+      "metric_uniform_sample_density.py": 0.92
+    },
+    "curve_9_v1.py": {
+      "metric_smoothness.py": 0.0,
+      "metric_time_uniformity.py": 0.576,
+      "metric_uniform_sample_density.py": 0.919
+    }
+  },
+  "feedback": "# Message to Agent 1: Generating Next Iteration Based on Top Performers\n\n## Analysis of Top 3 Curves\n\nThe top 3 curves demonstrate exceptional performance, with scores of **0.94**, **0.933**, and **0.845** respectively. Here's why they excel:\n\n**curve_2_v5.py (Score: 0.94)** - The best performer\n- Achieves near-perfect uniform sample density (0.99)\n- Uses **300 lines** for ultra-high density coverage\n- Employs **dual-axis 2D sinusoidal perturbation** with distinct frequencies:\n  - X-axis: amplitude=0.012, frequency=18\n  - Y-axis: amplitude=0.008, frequency=22\n- The asymmetric frequencies (18 vs 22) prevent resonance patterns\n- Small perturbation amplitudes maintain smoothness (0.924)\n\n**curve_2_v6.py (Score: 0.933)** - Second best\n- Also achieves 0.99 sample density with **300 lines**\n- Innovates with **triple-axis perturbation system**:\n  - Independent X: amplitude=0.011, frequency=19\n  - Independent Y: amplitude=0.007, frequency=29\n  - **Coupled XY term**: amplitude=0.004, frequency=13 on (x+y)\n- The coupled term adds subtle coordination between axes\n- Higher frequency diversity (13, 19, 29) further reduces artifacts\n\n**curve_5_v5.py (Score: 0.845)** - Third place\n- Uses **variable density** with power law (exponent=1.5)\n- Only 150 lines but strategic distribution\n- Simpler perturbation (amplitude=0.008, frequency=15)\n- Lower time uniformity (0.624) suggests room for improvement\n\n## Key Success Patterns Identified\n\n1. **High line density (300 lines)** is crucial for top performance\n2. **Multi-frequency perturbations** with prime or co-prime frequencies prevent interference\n3. **Small perturbation amplitudes (0.004-0.012)** maintain smoothness\n4. **Asymmetric X/Y perturbations** provide better coverage than symmetric\n5. **Coupled perturbation terms** add sophistication without destroying uniformity\n\n## Instructions for Next 5 Variations\n\nGenerate **exactly 5 new curves** exploring these specific directions:\n\n### Variation 1: Enhanced Coupled Perturbation\n- Base: 300 lines, serpentine\n- Triple perturbation with **two coupled terms**:\n  - Independent X: amp=0.010, freq=17\n  - Independent Y: amp=0.008, freq=23\n  - Coupled (x+y): amp=0.005, freq=11\n  - **NEW**: Coupled (x*y): amp=0.003, freq=13\n- Explore multiplicative coupling\n\n### Variation 2: Quad-Frequency System\n- Base: 300 lines, serpentine\n- **Four independent perturbations**:\n  - X primary: amp=0.009, freq=19\n  - X secondary: amp=0.004, freq=37 (harmonic exploration)\n  - Y primary: amp=0.007, freq=23\n  - Y secondary: amp=0.003, freq=41\n- Test if more frequencies improve or degrade performance\n\n### Variation 3: Optimized Variable Density\n- Base: curve_5_v5 concept but with **250 lines** (compromise)\n- Density exponent: try **1.3** (less aggressive than 1.5)\n- Enhanced perturbation to compensate:\n  - Dual-axis: X amp=0.011, freq=19; Y amp=0.008, freq=23\n- Goal: improve time uniformity while maintaining sample density\n\n### Variation 4: Phase-Shifted Perturbations\n- Base: 300 lines, serpentine\n- Introduce **phase shifts** between perturbations:\n  - X: amp=0.011, freq=18, phase=0\n  - Y: amp=0.008, freq=22, phase=\u03c0/3\n  - Coupled: amp=0.005, freq=13, phase=\u03c0/2"
+}
