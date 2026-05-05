@@ -1,0 +1,152 @@
+{
+  "iteration": 2,
+  "descriptors": [
+    {
+      "id": "d1",
+      "name": "grain size",
+      "physical_meaning": "Average diameter of grains, controls strength via Hall-Petch relationship",
+      "units": "micrometers",
+      "rationale": "Primary microstructural length scale governing mechanical properties",
+      "representation": {
+        "type": "scalar",
+        "encoding": "continuous positive real number",
+        "dimension": "1",
+        "notes": "Log-normal distribution typical, mean or median value"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Collapses full size distribution to single statistic",
+        "truncation_error": "Distribution shape and tail information lost",
+        "ambiguity_risk": "medium",
+        "notes": "Mean vs median choice affects interpretation"
+      }
+    },
+    {
+      "id": "d2",
+      "name": "grain boundary misorientation",
+      "physical_meaning": "Crystallographic angle between adjacent grains, determines boundary character and energy",
+      "units": "degrees",
+      "rationale": "Controls boundary mobility, energy, and deformation behavior",
+      "representation": {
+        "type": "finite_vector",
+        "encoding": "distribution histogram bins or statistical moments",
+        "dimension": "10-20",
+        "notes": "Mackenzie distribution for random texture baseline"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Spatial correlations and individual boundary identities lost",
+        "truncation_error": "Bin discretization or moment truncation loses detail",
+        "ambiguity_risk": "medium",
+        "notes": "Different histogram binning schemes yield different representations"
+      }
+    },
+    {
+      "id": "d3",
+      "name": "texture intensity",
+      "physical_meaning": "Degree of preferred crystallographic orientation in polycrystalline aggregate",
+      "units": "dimensionless",
+      "rationale": "Quantifies anisotropy in mechanical and physical properties",
+      "representation": {
+        "type": "scalar",
+        "encoding": "texture index or maximum ODF value",
+        "dimension": "1",
+        "notes": "J-index or Kearns factor common choices"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Full orientation distribution function reduced to single metric",
+        "truncation_error": "Texture type and symmetry information discarded",
+        "ambiguity_risk": "high",
+        "notes": "Different textures can yield identical intensity values"
+      }
+    },
+    {
+      "id": "d4",
+      "name": "dislocation density",
+      "physical_meaning": "Total length of dislocations per unit volume, measures stored plastic deformation",
+      "units": "m^-2",
+      "rationale": "Indicates work hardening state and stored energy",
+      "representation": {
+        "type": "scalar",
+        "encoding": "continuous positive real, often log scale",
+        "dimension": "1",
+        "notes": "Ranges typically 10^12 to 10^16 m^-2"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Dislocation arrangement, character, and spatial distribution lost",
+        "truncation_error": "Cell structure and patterning information discarded",
+        "ambiguity_risk": "medium",
+        "notes": "Total density ignores edge vs screw character"
+      }
+    },
+    {
+      "id": "d5",
+      "name": "precipitate volume fraction",
+      "physical_meaning": "Volume percentage of second-phase particles dispersed in matrix",
+      "units": "percent",
+      "rationale": "Determines precipitation strengthening contribution and boundary pinning",
+      "representation": {
+        "type": "scalar",
+        "encoding": "continuous non-negative fraction [0,1]",
+        "dimension": "1",
+        "notes": "May include size distribution parameters separately"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Precipitate size, shape, spacing, and spatial distribution lost",
+        "truncation_error": "Morphology and coherency information omitted",
+        "ambiguity_risk": "high",
+        "notes": "Same fraction can arise from vastly different populations"
+      }
+    },
+    {
+      "id": "d6",
+      "name": "stacking fault energy",
+      "physical_meaning": "Energy per unit area of stacking fault, material-specific parameter",
+      "units": "mJ/m^2",
+      "rationale": "Controls dislocation dissociation and deformation mechanism selection",
+      "representation": {
+        "type": "scalar",
+        "encoding": "continuous positive real number",
+        "dimension": "1",
+        "notes": "Intrinsic material property, composition and temperature dependent"
+      },
+      "quality": {
+        "bijective": true,
+        "lossy": false,
+        "loss_reason": null,
+        "truncation_error": null,
+        "ambiguity_risk": "low",
+        "notes": "Direct physical property with unique value per condition"
+      }
+    },
+    {
+      "id": "d7",
+      "name": "grain boundary density",
+      "physical_meaning": "Total grain boundary area per unit volume of material",
+      "units": "mm^-1",
+      "rationale": "Correlates with boundary-mediated processes like diffusion and sliding",
+      "representation": {
+        "type": "scalar",
+        "encoding": "continuous positive real, inversely proportional to grain size",
+        "dimension": "1",
+        "notes": "Approximately 2/grain_size for equiaxed grains"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Grain shape variations and topology lost",
+        "truncation_error": "Assumes equiaxed morphology approximation",
+        "ambiguity_risk": "medium",
+        "notes": "Redundant with grain size for simple geometries"
+      }
+    }
+  ]
+}
