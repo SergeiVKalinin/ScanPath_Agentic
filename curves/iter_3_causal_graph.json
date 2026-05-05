@@ -1,0 +1,220 @@
+{
+  "iteration": 3,
+  "causal_graph": {
+    "nodes": [
+      "d1",
+      "d2",
+      "d3",
+      "d4",
+      "d5",
+      "d6",
+      "d7",
+      "d8",
+      "d9"
+    ],
+    "edges": [
+      {
+        "from": "d1",
+        "to": "d7",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Grain boundary area per volume inversely proportional to grain size"
+      },
+      {
+        "from": "d4",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "medium",
+        "reason": "Higher dislocation density drives finer recrystallized grain size"
+      },
+      {
+        "from": "d6",
+        "to": "d4",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Low stacking fault energy inhibits dislocation recovery mechanisms"
+      },
+      {
+        "from": "d5",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Precipitates pin grain boundaries limiting grain growth via Zener"
+      },
+      {
+        "from": "d4",
+        "to": "d9",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Stored dislocation energy provides driving force for recrystallization"
+      },
+      {
+        "from": "d9",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "medium",
+        "reason": "Recrystallization fraction determines final grain size distribution"
+      },
+      {
+        "from": "d6",
+        "to": "d3",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "medium",
+        "reason": "Stacking fault energy controls deformation mechanisms affecting texture"
+      },
+      {
+        "from": "d5",
+        "to": "d4",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Precipitates generate geometrically necessary dislocations via Orowan mechanism"
+      },
+      {
+        "from": "d4",
+        "to": "d8",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "medium",
+        "reason": "Dislocation structure influences grain elongation during deformation"
+      },
+      {
+        "from": "d8",
+        "to": "d3",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "medium",
+        "reason": "Grain elongation develops from texture-forming deformation modes"
+      },
+      {
+        "from": "d1",
+        "to": "d2",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "medium",
+        "reason": "Grain size distribution affects misorientation statistics from growth processes"
+      },
+      {
+        "from": "d9",
+        "to": "d2",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Recrystallization produces high-angle grain boundaries between new grains"
+      },
+      {
+        "from": "d5",
+        "to": "d9",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "medium",
+        "reason": "Precipitates provide nucleation sites and affect recrystallization kinetics"
+      },
+      {
+        "from": "d3",
+        "to": "d2",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "low",
+        "reason": "Strong texture concentrates grain orientations affecting misorientation distribution"
+      },
+      {
+        "from": "d6",
+        "to": "d9",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "medium",
+        "reason": "Stacking fault energy affects stored energy and recrystallization nucleation"
+      }
+    ],
+    "cycles_resolved": [
+      {
+        "cycle": [
+          "d4",
+          "d1",
+          "d7"
+        ],
+        "resolution": "No cycle: d4\u2192d1\u2192d7 is acyclic chain",
+        "action": "None needed"
+      },
+      {
+        "cycle": [
+          "d8",
+          "d3"
+        ],
+        "resolution": "Direction set: d8\u2192d3, grain shape causes texture",
+        "action": "Promoted correlation to causal"
+      }
+    ],
+    "notes": "Added edges: d1\u2192d2, d9\u2192d2, d5\u2192d9, d4\u2192d8, d6\u2192d9, d3\u2192d2. Promoted d8\u2192d3 to causal.",
+    "edges_cleaned": [
+      {
+        "from": "d1",
+        "to": "d7"
+      },
+      {
+        "from": "d1",
+        "to": "d2"
+      },
+      {
+        "from": "d4",
+        "to": "d1"
+      },
+      {
+        "from": "d4",
+        "to": "d9"
+      },
+      {
+        "from": "d4",
+        "to": "d8"
+      },
+      {
+        "from": "d6",
+        "to": "d4"
+      },
+      {
+        "from": "d6",
+        "to": "d3"
+      },
+      {
+        "from": "d6",
+        "to": "d9"
+      },
+      {
+        "from": "d5",
+        "to": "d1"
+      },
+      {
+        "from": "d5",
+        "to": "d4"
+      },
+      {
+        "from": "d5",
+        "to": "d9"
+      },
+      {
+        "from": "d9",
+        "to": "d1"
+      },
+      {
+        "from": "d9",
+        "to": "d2"
+      },
+      {
+        "from": "d3",
+        "to": "d2"
+      },
+      {
+        "from": "d8",
+        "to": "d3"
+      }
+    ]
+  }
+}
