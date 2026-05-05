@@ -1,0 +1,110 @@
+{
+  "iteration": 1,
+  "descriptors": [
+    {
+      "id": "d1",
+      "name": "grain size",
+      "physical_meaning": "Average diameter of crystalline grains in microstructure",
+      "units": "micrometers",
+      "rationale": "Controls strength via Hall-Petch relation and diffusion kinetics",
+      "representation": {
+        "type": "scalar",
+        "encoding": "real positive value",
+        "dimension": "1",
+        "notes": "Mean intercept length or equivalent circle diameter"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Averaging loses full grain size distribution information",
+        "truncation_error": "moderate",
+        "ambiguity_risk": "medium",
+        "notes": "Different distributions yield identical means; method-dependent measurement"
+      }
+    },
+    {
+      "id": "d2",
+      "name": "grain boundary misorientation",
+      "physical_meaning": "Crystallographic orientation difference between adjacent grains",
+      "units": "degrees",
+      "rationale": "Distinguishes low-angle versus high-angle boundaries affecting deformation and energy",
+      "representation": {
+        "type": "finite_vector",
+        "encoding": "histogram of misorientation angles",
+        "dimension": "10-20",
+        "notes": "Binned distribution from 0 to 62.8 degrees"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Binning loses exact angle values and spatial arrangement",
+        "truncation_error": "low",
+        "ambiguity_risk": "low",
+        "notes": "Histogram preserves distribution shape; bin resolution determines fidelity"
+      }
+    },
+    {
+      "id": "d3",
+      "name": "texture intensity",
+      "physical_meaning": "Degree of preferred crystallographic orientation in polycrystal",
+      "units": "multiples of random distribution",
+      "rationale": "Quantifies anisotropy in mechanical and physical properties",
+      "representation": {
+        "type": "scalar",
+        "encoding": "texture index or ODF maximum",
+        "dimension": "1",
+        "notes": "Single metric like J-index or max intensity"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Single scalar collapses full orientation distribution function",
+        "truncation_error": "high",
+        "ambiguity_risk": "high",
+        "notes": "Different texture types produce same index; loses spatial and component detail"
+      }
+    },
+    {
+      "id": "d4",
+      "name": "grain aspect ratio",
+      "physical_meaning": "Ratio of longest to shortest grain dimension",
+      "units": "dimensionless",
+      "rationale": "Indicates grain elongation from processing affecting directional properties",
+      "representation": {
+        "type": "scalar",
+        "encoding": "real value greater than or equal to 1",
+        "dimension": "1",
+        "notes": "Mean aspect ratio across grain population"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Mean erases distribution and orientation direction of elongation",
+        "truncation_error": "moderate",
+        "ambiguity_risk": "high",
+        "notes": "Loses directional information and variance across grain population"
+      }
+    },
+    {
+      "id": "d5",
+      "name": "dislocation density",
+      "physical_meaning": "Total length of dislocations per unit volume",
+      "units": "m^-2",
+      "rationale": "Governs strain hardening and stored energy state",
+      "representation": {
+        "type": "scalar",
+        "encoding": "real positive value in logarithmic scale",
+        "dimension": "1",
+        "notes": "Typically 10^12 to 10^16 m^-2 range"
+      },
+      "quality": {
+        "bijective": false,
+        "lossy": true,
+        "loss_reason": "Scalar ignores dislocation type, arrangement, and spatial heterogeneity",
+        "truncation_error": "high",
+        "ambiguity_risk": "high",
+        "notes": "Different dislocation configurations yield same density; measurement method varies"
+      }
+    }
+  ]
+}
