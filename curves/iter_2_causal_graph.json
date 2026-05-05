@@ -1,0 +1,150 @@
+{
+  "iteration": 2,
+  "causal_graph": {
+    "nodes": [
+      "d1",
+      "d2",
+      "d3",
+      "d4",
+      "d5",
+      "d6",
+      "d7"
+    ],
+    "edges": [
+      {
+        "from": "d1",
+        "to": "d7",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Geometric: grain boundary density inversely proportional to grain size"
+      },
+      {
+        "from": "d6",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "medium",
+        "reason": "Higher SFE promotes recovery over recrystallization, affecting final grain size"
+      },
+      {
+        "from": "d6",
+        "to": "d4",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Low SFE suppresses cross-slip, increases dislocation storage during deformation"
+      },
+      {
+        "from": "d4",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Higher dislocation density increases stored energy, refines recrystallized grains"
+      },
+      {
+        "from": "d5",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Precipitates pin grain boundaries via Zener drag, limiting growth"
+      },
+      {
+        "from": "d5",
+        "to": "d4",
+        "type": "causal",
+        "mechanism": "direct",
+        "confidence": "high",
+        "reason": "Precipitates generate dislocation loops via Orowan mechanism during deformation"
+      },
+      {
+        "from": "d6",
+        "to": "d3",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "medium",
+        "reason": "SFE affects deformation modes and recrystallization texture development"
+      },
+      {
+        "from": "d4",
+        "to": "d3",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "medium",
+        "reason": "Dislocation structures influence deformation texture and recrystallization texture formation"
+      },
+      {
+        "from": "d3",
+        "to": "d1",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "low",
+        "reason": "Strong texture enables abnormal grain growth via mobility differences"
+      },
+      {
+        "from": "d1",
+        "to": "d2",
+        "type": "causal",
+        "mechanism": "indirect",
+        "confidence": "low",
+        "reason": "Processing routes producing small grains often leave low-angle boundaries"
+      }
+    ],
+    "cycles_resolved": [
+      {
+        "cycle": [
+          "d6",
+          "d4",
+          "d1"
+        ],
+        "resolution": "No cycle: d6\u2192d4\u2192d1\u2192d7 and d6\u2192d1 are compatible sequential influences",
+        "reason": "Both paths represent legitimate influences at different processing stages"
+      }
+    ],
+    "notes": "DAG captures microstructure evolution: SFE and precipitates affect dislocations and grains, which determine boundary density. Texture added as downstream effect.",
+    "edges_cleaned": [
+      {
+        "from": "d1",
+        "to": "d7"
+      },
+      {
+        "from": "d1",
+        "to": "d2"
+      },
+      {
+        "from": "d6",
+        "to": "d1"
+      },
+      {
+        "from": "d6",
+        "to": "d4"
+      },
+      {
+        "from": "d6",
+        "to": "d3"
+      },
+      {
+        "from": "d4",
+        "to": "d1"
+      },
+      {
+        "from": "d4",
+        "to": "d3"
+      },
+      {
+        "from": "d5",
+        "to": "d1"
+      },
+      {
+        "from": "d5",
+        "to": "d4"
+      },
+      {
+        "from": "d3",
+        "to": "d1"
+      }
+    ]
+  }
+}
